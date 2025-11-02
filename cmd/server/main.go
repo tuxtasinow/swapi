@@ -17,7 +17,11 @@ const httpPort = ":3000"
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/{planetId}", func(w http.ResponseWriter, r *http.Request) {
+		planetId := chi.URLParam(r, "planetId")
+
+		fmt.Printf("Request planetId: %s\n", planetId)
+
 		_, err := w.Write([]byte("welcome"))
 		if err != nil {
 			log.Println(err)
